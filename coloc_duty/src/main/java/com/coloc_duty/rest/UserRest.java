@@ -45,7 +45,7 @@ public class UserRest {
 	}
 
 	@PostMapping("/saveuser")
-	public User saveUser(User user) {
+	public User saveUser(@RequestBody User user) {
 		return userRepo.save(user);
 
 	}
@@ -55,8 +55,6 @@ public class UserRest {
 		List<User> l = getAllUsers();
 		String p = null;
 		int i = 0;
-		System.out.println("le login du user à ajouter est : " + user.getLogin());
-		System.out.println("le mail du user à ajouter est : " + user.getEmail());
 		while (i < l.size() && p == null) {
 			if (l.get(i).getLogin().equals(user.getLogin())) {
 				p = "errorLogin";
@@ -66,10 +64,8 @@ public class UserRest {
 			}
 			if (l.get(i).getLogin().equals(user.getLogin()) && l.get(i).getEmail().equals(user.getEmail())) {
 				p="errorBoth";
-				
 			}
 			i++;
-			System.out.println("Le login du user : " + i + " est : " + l.get(i - 1).getLogin());
 		}
 		return p;
 	}
