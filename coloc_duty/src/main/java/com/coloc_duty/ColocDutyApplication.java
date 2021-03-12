@@ -29,11 +29,6 @@ public class ColocDutyApplication implements  CommandLineRunner{
 
 		User u1 = new User(null, "login", "password", "email", "pseudo", "genre");
 		userRepo.save(u1);
-		
-		
-		String login = "login";
-		String password = "password";
-		System.out.println(userRest.connexion(login,password));
 
 	}
 }
