@@ -19,14 +19,17 @@ public class UserRest {
 	@Autowired
 	private  UserRepository userRepo;
 	
-	@GetMapping("/connexion{login,password}")
-	public  Long connexion(@PathVariable String login, @PathVariable String password) {
+	@GetMapping("/connexion")
+	public  Long connexion( @RequestBody User user ) {
 		List<User> list = (List<User>) userRepo.findAll();
 		for (int i = 0; i<list.size();i++) {
 			User u = list.get(i);
 			String l = u.getLogin();
 			String p = u.getPassword();
-			if (l.equals(l) && p.equals(p)) {
+			String login = user.getLogin();
+			String password = user.getPassword();
+			System.out.println(login + " " + password);
+			if (l.equals(login) && p.equals(password)) {
 				return u.getIdUser();
 			}
 		}
