@@ -46,7 +46,7 @@ public class ColocDutyApplication implements  CommandLineRunner{
 		User u2 = new User(null, "login2", "password2", "email2", "pseudo2", "genre2");
 		User u3 = new User(null, "login3", "password3", "email3", "pseudo3", "genre3");
 		User u4 = new User(null, "login4", "password4", "email4", "pseudo4", "genre4");
-		Adresse a1= new Adresse(null,2,"Alesia","Paris");
+		Adresse a1= new Adresse(null,2,"Alesia","Paris",14000);
 		
 		adresseRepo.save(a1);
 		

@@ -9,13 +9,19 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.coloc_duty.entities.Adresse;
 import com.coloc_duty.entities.Coloc;
 import com.coloc_duty.entities.User;
+import com.coloc_duty.repository.AdresseRepository;
 import com.coloc_duty.repository.ColocRepository;
 
 
 @RestController @CrossOrigin("*")
 public class ColocRest {
+	
+	@Autowired
+	private AdresseRepository adresseRepo;
+	
 	@Autowired
 	private  ColocRepository colocRepo;
 	
@@ -28,6 +34,8 @@ public class ColocRest {
 	
 	@PostMapping("/savecoloc")
 	public Coloc saveColoc(@RequestBody Coloc coloc) {
+		Adresse a = adresseRepo.save(coloc.getAdresse());
+		coloc.setAdresse(a);
 		return colocRepo.save(coloc);
 	}
 
