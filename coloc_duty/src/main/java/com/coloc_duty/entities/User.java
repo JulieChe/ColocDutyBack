@@ -19,4 +19,10 @@ public class User {
 	private String email;
 	private String pseudo;
 	private String genre;
+	
+	public User(String login,String password) {
+		this.login=login;
+		this.password=password;
+	}
+	
 }
