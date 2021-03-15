@@ -50,7 +50,7 @@ public class UserRest {
 
 	}
 
-	@GetMapping("/signin")
+	@PostMapping("/signin")
 	public String subscribed(@RequestBody User user) {
 		List<User> l = getAllUsers();
 		String p = null;
@@ -69,6 +69,13 @@ public class UserRest {
 		}
 		return p;
 	}
+	
+	
+	// public User inscription(@RequestBody User user) {
+		
+		
+		
+	//}
 	
 
 }
