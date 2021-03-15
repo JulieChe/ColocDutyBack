@@ -1,6 +1,7 @@
 package com.coloc_duty.rest;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;
@@ -37,6 +38,11 @@ public class UserRest {
 		return (long) 0;
 	}
 	
+	@PostMapping("/connexion_ok")
+	public Optional<User> connexion_ok(@RequestBody User u) {
+		
+		return userRepo.findByLoginAndPassword(u.getLogin(), u.getPassword());
+	}
 	
 	@GetMapping("/users")
 	public List<User> getAllUsers() {
