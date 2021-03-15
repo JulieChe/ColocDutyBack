@@ -11,7 +11,6 @@ import com.coloc_duty.entities.User;
 import com.coloc_duty.repository.AdresseRepository;
 import com.coloc_duty.repository.ColocRepository;
 import com.coloc_duty.repository.UserRepository;
-import com.coloc_duty.rest.UserRest;
 
 
 @SpringBootApplication
@@ -27,9 +26,6 @@ public class ColocDutyApplication implements  CommandLineRunner{
 	@Autowired
 	private ColocRepository colocRepo;
 	
-	@Autowired
-	private UserRest userRest;
-
 	public static void main(String[] args) {
 		SpringApplication.run(ColocDutyApplication.class, args);
 		
