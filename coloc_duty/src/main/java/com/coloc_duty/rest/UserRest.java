@@ -49,12 +49,12 @@ public class UserRest {
 
 	}
 
-	@PostMapping("/saveuser")
-	public User saveUser(@RequestBody User user) {
-
-		return userRepo.save(user);
-
-	}
+//	@PostMapping("/saveuser")
+//	public User saveUser(@RequestBody User user) {
+//
+//		return userRepo.save(user);
+//
+//	}
 
 //	@PostMapping("/signin")
 //	public String subscribed(@RequestBody User user) {

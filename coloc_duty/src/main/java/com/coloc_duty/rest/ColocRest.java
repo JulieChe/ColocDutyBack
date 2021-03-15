@@ -1,6 +1,7 @@
 package com.coloc_duty.rest;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;
@@ -29,6 +30,12 @@ public class ColocRest {
 		return colocRepo.save(coloc);
 	}
 
+	@PostMapping("/getColoc") 
+	public Optional<Coloc> getColoc(@RequestBody Long idColoc) {
+		
+		return colocRepo.findById(idColoc);
+	}
+	
 	@GetMapping("/gotocoloc")
 	public String subscribed(@RequestBody Coloc coloc) {
 		List<Coloc> l = getAllColocs();
