@@ -3,6 +3,9 @@ package com.coloc_duty.entities;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.OneToOne;
+
+import com.coloc_duty.entities.*;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -10,19 +13,16 @@ import lombok.NoArgsConstructor;
 
 @Entity @NoArgsConstructor @AllArgsConstructor
 @Data
-public class User {
+public class Coloc {
 	
 	@Id @GeneratedValue
-	private Long idUser;
-	private String login;
-	private String password;
-	private String email;
-	private String pseudo;
-	private String genre;
+	private Long idColoc;
+	private String nomColoc;
+	private String descColoc;
+	private String capacite;
+	private String loyer;
+	private boolean isPublic;
 	
-	public User(String login,String password) {
-		this.login=login;
-		this.password=password;
-	}
-	
+	@OneToOne
+	private Adresse adresse;
 }
