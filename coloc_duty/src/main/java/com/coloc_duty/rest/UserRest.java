@@ -13,16 +13,16 @@ import org.springframework.web.bind.annotation.RestController;
 import com.coloc_duty.entities.User;
 import com.coloc_duty.repository.UserRepository;
 
-
-@RestController @CrossOrigin("*")
+@RestController
+@CrossOrigin("*")
 public class UserRest {
 	@Autowired
-	private  UserRepository userRepo;
-	
+	private UserRepository userRepo;
+
 	@GetMapping("/connexion")
-	public  Long connexion( @RequestBody User user ) {
+	public Long connexion(@RequestBody User user) {
 		List<User> list = (List<User>) userRepo.findAll();
-		for (int i = 0; i<list.size();i++) {
+		for (int i = 0; i < list.size(); i++) {
 			User u = list.get(i);
 			String l = u.getLogin();
 			String p = u.getPassword();
@@ -33,16 +33,16 @@ public class UserRest {
 				return u.getIdUser();
 			}
 		}
-		
+
 		return (long) 0;
 	}
-	
+
 	@PostMapping("/connexion_ok")
 	public Optional<User> connexion_ok(@RequestBody User u) {
-		
+
 		return userRepo.findByLoginAndPassword(u.getLogin(), u.getPassword());
 	}
-	
+
 	@GetMapping("/users")
 	public List<User> getAllUsers() {
 		return (List<User>) userRepo.findAll();
@@ -51,36 +51,45 @@ public class UserRest {
 
 	@PostMapping("/saveuser")
 	public User saveUser(@RequestBody User user) {
+
 		return userRepo.save(user);
 
 	}
 
-	@PostMapping("/signin")
-	public String subscribed(@RequestBody User user) {
-		List<User> l = getAllUsers();
-		String p = null;
-		int i = 0;
-		while (i < l.size() && p == null) {
-			if (l.get(i).getLogin().equals(user.getLogin())) {
-				p = "errorLogin";
-			}
-			if (l.get(i).getEmail().equals(user.getEmail())) {
-				p = "errorEmail";
-			}
-			if (l.get(i).getLogin().equals(user.getLogin()) && l.get(i).getEmail().equals(user.getEmail())) {
-				p="errorBoth";
-			}
-			i++;
+//	@PostMapping("/signin")
+//	public String subscribed(@RequestBody User user) {
+//		List<User> l = getAllUsers();
+//		String p = null;
+//		int i = 0;
+//		while (i < l.size() && p == null) {
+//			if (l.get(i).getLogin().equals(user.getLogin())) {
+//				p = "errorLogin";
+//			}
+//			if (l.get(i).getEmail().equals(user.getEmail())) {
+//				p = "errorEmail";
+//			}
+//			if (l.get(i).getLogin().equals(user.getLogin()) && l.get(i).getEmail().equals(user.getEmail())) {
+//				p = "errorBoth";
+//			}
+//			i++;
+//		}
+//		return p;
+//	}
+
+	@PostMapping("/inscription")
+	public String inscription(@RequestBody User user) {
+		Optional<User> userTestByLogin = userRepo.findByLogin(user.getLogin()); // test du login
+		Optional<User> userTestByEmail = userRepo.findByEmail(user.getEmail());
+		if (userTestByLogin.isPresent()) {
+			return "errorLogin";
+		} else if (userTestByEmail.isPresent()) {
+			return "errorEmail";
+		} else {
+			userRepo.save(user);
+			return "utilisateur créé";
 		}
-		return p;
+		
+
 	}
-	
-	
-	// public User inscription(@RequestBody User user) {
-		
-		
-		
-	//}
-	
 
 }
