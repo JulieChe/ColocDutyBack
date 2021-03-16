@@ -16,20 +16,19 @@ import com.coloc_duty.entities.Coloc;
 import com.coloc_duty.entities.User;
 import com.coloc_duty.repository.AdresseRepository;
 
-
 import com.coloc_duty.repository.ColocRepository;
 import com.coloc_duty.repository.UserRepository;
 
 @RestController
 @CrossOrigin("*")
 public class ColocRest {
-	
+
 	@Autowired
 	private AdresseRepository adresseRepo;
-	
+
 	@Autowired
 	private ColocRepository colocRepo;
-	
+
 	@Autowired
 	private UserRepository userRepo;
 
@@ -43,22 +42,33 @@ public class ColocRest {
 	public Coloc saveColoc(@RequestBody Coloc coloc, @PathVariable Long id) {
 		Adresse a = adresseRepo.save(coloc.getAdresse());
 		coloc.setAdresse(a);
-		
+
 		Coloc c = colocRepo.save(coloc);
 		Optional<User> u = userRepo.findById(id);
 		u.get().setColoc(c);
-		
+
 		userRepo.save(u.get());
 		return c;
 	}
 
-
-	@PostMapping("/getColoc") 
+	@PostMapping("/getColoc")
 	public Optional<Coloc> getColoc(@RequestBody Long idColoc) {
-		
+
 		return colocRepo.findById(idColoc);
 	}
-	
+
+	@PostMapping("/getidColocbyidUser")
+	public Long getIdColocByIdUser(@RequestBody Long idUser) {
+		User user = userRepo.findByIdUser(idUser).get(); 
+		if (user.getColoc() != null) {
+		Long idColoc = user.getColoc().getIdColoc(); 
+		return idColoc;
+		} else {
+			return Long.valueOf(0); 
+		}
+		
+	}
+
 	@GetMapping("/gotocoloc")
 	public String subscribed(@RequestBody Coloc coloc) {
 		List<Coloc> l = getAllColocs();
@@ -85,12 +95,11 @@ public class ColocRest {
 //		}
 //		return p;
 //	}
-	
+
 	@PostMapping("/idColoc_ok")
 	public Optional<Coloc> idColoc_ok(@RequestBody Coloc u) {
 		return colocRepo.findByIdColoc(u.getIdColoc());
 
 	}
-
 
 }
