@@ -19,6 +19,7 @@ import com.coloc_duty.entities.User;
 import com.coloc_duty.repository.AdresseRepository;
 import com.coloc_duty.repository.ColocRepository;
 import com.coloc_duty.repository.DemandeRepository;
+import com.coloc_duty.repository.TacheRepository;
 import com.coloc_duty.repository.UserRepository;
 
 
@@ -37,6 +38,9 @@ public class ColocDutyApplication implements  CommandLineRunner{
 	
 	@Autowired
 	private DemandeRepository demandeRepo;
+	
+	@Autowired
+	private TacheRepository tacheRepo;
 	
 	public static void main(String[] args) {
 		SpringApplication.run(ColocDutyApplication.class, args);
@@ -75,7 +79,7 @@ public class ColocDutyApplication implements  CommandLineRunner{
 		colocRepo.save(c4);
 
 		// Test intégration user avec une coloc
-		User u5 = new User(null, "login4", "password4", "email4", "pseudo4", "genre4", c1);
+		User u5 = new User(null, "login5", "password5", "email5", "pseudo4", "genre5", c1);
 		userRepo.save(u5);
 
 
@@ -85,7 +89,9 @@ public class ColocDutyApplication implements  CommandLineRunner{
 		Tache t2 = new Tache(null, "AspirateurSalon", LocalDate.now(), 2.5, false, c2, u2);
 		Tache t3 = new Tache(null, "MénageCuisine", LocalDate.now(), (double) 3, false, c3, u3);
 		
-		
+		tacheRepo.save(t1);
+		tacheRepo.save(t2);
+		tacheRepo.save(t3);
 
 		// Test d'intégration de demande
 		Demande d1 = new Demande(u1, c1, "message1", true);
