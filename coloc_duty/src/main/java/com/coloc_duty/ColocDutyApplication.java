@@ -10,10 +10,15 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 import com.coloc_duty.entities.Adresse;
 import com.coloc_duty.entities.Coloc;
+
 import com.coloc_duty.entities.Tache;
+
+import com.coloc_duty.entities.Demande;
+
 import com.coloc_duty.entities.User;
 import com.coloc_duty.repository.AdresseRepository;
 import com.coloc_duty.repository.ColocRepository;
+import com.coloc_duty.repository.DemandeRepository;
 import com.coloc_duty.repository.UserRepository;
 
 
@@ -30,6 +35,9 @@ public class ColocDutyApplication implements  CommandLineRunner{
 	@Autowired
 	private ColocRepository colocRepo;
 	
+	@Autowired
+	private DemandeRepository demandeRepo;
+	
 	public static void main(String[] args) {
 		SpringApplication.run(ColocDutyApplication.class, args);
 		
@@ -42,10 +50,10 @@ public class ColocDutyApplication implements  CommandLineRunner{
 		System.out.println("lancement");
 
 	// Test d'intégration d'utilisateur
-		User u1 = new User(null, "login1", "password1", "email1", "pseudo1", "genre1");
-		User u2 = new User(null, "login2", "password2", "email2", "pseudo2", "genre2");
-		User u3 = new User(null, "login3", "password3", "email3", "pseudo3", "genre3");
-		User u4 = new User(null, "login4", "password4", "email4", "pseudo4", "genre4");
+		User u1 = new User(null, "login1", "password1", "email1", "pseudo1", "genre1", null);
+		User u2 = new User(null, "login2", "password2", "email2", "pseudo2", "genre2", null);
+		User u3 = new User(null, "login3", "password3", "email3", "pseudo3", "genre3", null);
+		User u4 = new User(null, "login4", "password4", "email4", "pseudo4", "genre4", null);
 		Adresse a1= new Adresse(null,2,"Alesia","Paris",14000);
 		
 		adresseRepo.save(a1);
@@ -66,6 +74,7 @@ public class ColocDutyApplication implements  CommandLineRunner{
 		colocRepo.save(c3);
 		colocRepo.save(c4);
 		
+
 		
 		// Test d'intégration de taches
 		Tache t1 = new Tache(null, "MénageSDB", LocalDate.now(), (double) 3, false, c1, u1);
@@ -73,6 +82,13 @@ public class ColocDutyApplication implements  CommandLineRunner{
 		Tache t3 = new Tache(null, "MénageCuisine", LocalDate.now(), (double) 3, false, c3, u3);
 		
 		
+
+		// Test d'intégration de demande
+		Demande d1 = new Demande(u1, c1, "message1", true);
+		Demande d2 = new Demande(u2, c2, "message2", false);
+		demandeRepo.save(d1);
+		demandeRepo.save(d2);
+
 		
 	}
 	
