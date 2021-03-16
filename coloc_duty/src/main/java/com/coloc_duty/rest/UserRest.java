@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.coloc_duty.entities.Adresse;
+
 import com.coloc_duty.entities.Coloc;
 import com.coloc_duty.entities.Ids;
 import com.coloc_duty.entities.User;
@@ -65,6 +66,20 @@ public class UserRest {
 	@GetMapping("/users")
 	public List<User> getAllUsers() {
 		return (List<User>) userRepo.findAll();
+
+	}
+	
+
+	@PostMapping("/getUser")
+	public Optional<User> getUser(@RequestBody Long idUser) {
+
+		return userRepo.findById(idUser);
+	}
+
+	@PostMapping("/getUserByIdColoc")
+	public Optional<User> getUserByColoc(@RequestBody Long idColoc){
+		return userRepo.findByColoc(colocRepo.findById(idColoc).get());
+		
 
 	}
 

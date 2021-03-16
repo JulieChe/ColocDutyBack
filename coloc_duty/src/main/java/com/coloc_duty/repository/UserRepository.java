@@ -4,6 +4,7 @@ import java.util.Optional;
 
 import org.springframework.data.repository.CrudRepository;
 
+import com.coloc_duty.entities.Coloc;
 import com.coloc_duty.entities.User;
 
 public interface UserRepository  extends CrudRepository<User,Long>{
@@ -17,6 +18,7 @@ public interface UserRepository  extends CrudRepository<User,Long>{
 	
 	public Optional<User> findByIdUser(Long idUser);
 	
+	public Optional<User> findByColoc(Coloc coloc);
 
 	
 }

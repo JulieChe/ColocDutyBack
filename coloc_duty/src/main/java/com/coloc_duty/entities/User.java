@@ -4,6 +4,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToOne;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -23,6 +24,9 @@ public class User {
 	
 	@ManyToOne
 	private Coloc coloc;
+	
+	@OneToOne
+	private Mur mur;
 	
 	
 }
