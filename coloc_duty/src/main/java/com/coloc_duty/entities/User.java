@@ -3,6 +3,7 @@ package com.coloc_duty.entities;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.ManyToOne;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -20,9 +21,8 @@ public class User {
 	private String pseudo;
 	private String genre;
 	
-	public User(String login,String password) {
-		this.login=login;
-		this.password=password;
-	}
+	@ManyToOne
+	private Coloc coloc;
+	
 	
 }

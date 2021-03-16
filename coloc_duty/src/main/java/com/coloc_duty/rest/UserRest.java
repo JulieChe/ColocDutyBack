@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.coloc_duty.entities.Ids;
 import com.coloc_duty.entities.User;
 import com.coloc_duty.repository.UserRepository;
 
@@ -19,6 +20,16 @@ public class UserRest {
 	@Autowired
 	private UserRepository userRepo;
 
+
+	@PostMapping("/setColocToUser")
+	public User setColocToUser(User uInput) {
+		Optional<User> uOutput = userRepo.findById(uInput.getIdUser());
+		uOutput.get().setColoc(uInput.getColoc());
+		return uOutput.get();
+		
+	}
+	
+	
 	@GetMapping("/connexion")
 	public Long connexion(@RequestBody User user) {
 		List<User> list = (List<User>) userRepo.findAll();
@@ -91,5 +102,7 @@ public class UserRest {
 		
 
 	}
+	
+	
 
 }
