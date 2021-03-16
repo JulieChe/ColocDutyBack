@@ -66,7 +66,7 @@ public class ColocDutyApplication implements CommandLineRunner {
 		colocRepo.save(c4);
 
 		// Test intégration user avec une coloc
-		User u5 = new User(null, "login4", "password4", "email4", "pseudo4", "genre4", c1);
+		User u5 = new User(null, "login5", "password5", "email5", "pseudo5", "genre5", c1);
 		userRepo.save(u5);
 
 		// Test d'intégration de demande
