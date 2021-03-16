@@ -13,7 +13,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.coloc_duty.entities.Adresse;
 import com.coloc_duty.entities.Coloc;
-
+import com.coloc_duty.entities.User;
 import com.coloc_duty.repository.AdresseRepository;
 
 
