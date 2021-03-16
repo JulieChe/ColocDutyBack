@@ -5,10 +5,6 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.OneToOne;
 
-import org.hibernate.annotations.Cascade;
-import org.hibernate.annotations.CascadeType;
-
-import com.coloc_duty.entities.*;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;

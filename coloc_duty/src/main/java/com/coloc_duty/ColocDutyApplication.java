@@ -7,11 +7,12 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 import com.coloc_duty.entities.Adresse;
 import com.coloc_duty.entities.Coloc;
+import com.coloc_duty.entities.Demande;
 import com.coloc_duty.entities.User;
 import com.coloc_duty.repository.AdresseRepository;
 import com.coloc_duty.repository.ColocRepository;
+import com.coloc_duty.repository.DemandeRepository;
 import com.coloc_duty.repository.UserRepository;
-import com.coloc_duty.rest.UserRest;
 
 
 @SpringBootApplication
@@ -28,8 +29,8 @@ public class ColocDutyApplication implements  CommandLineRunner{
 	private ColocRepository colocRepo;
 	
 	@Autowired
-	private UserRest userRest;
-
+	private DemandeRepository demandeRepo;
+	
 	public static void main(String[] args) {
 		SpringApplication.run(ColocDutyApplication.class, args);
 		
@@ -65,6 +66,13 @@ public class ColocDutyApplication implements  CommandLineRunner{
 		colocRepo.save(c2);
 		colocRepo.save(c3);
 		colocRepo.save(c4);
+		
+		// Test d'intégration de demande
+		Demande d1 = new Demande(u1, c1, "message1", true);
+		Demande d2 = new Demande(u2, c2, "message2", false);
+		demandeRepo.save(d1);
+		demandeRepo.save(d2);
+		
 	}
 	
 	

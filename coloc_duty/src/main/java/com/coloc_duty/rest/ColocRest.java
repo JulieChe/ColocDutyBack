@@ -14,8 +14,8 @@ import org.springframework.web.bind.annotation.RestController;
 import com.coloc_duty.entities.Adresse;
 import com.coloc_duty.entities.Coloc;
 
-import com.coloc_duty.entities.User;
 import com.coloc_duty.repository.AdresseRepository;
+
 
 import com.coloc_duty.repository.ColocRepository;
 import com.coloc_duty.repository.UserRepository;
@@ -52,6 +52,13 @@ public class ColocRest {
 		return c;
 	}
 
+
+	@PostMapping("/getColoc") 
+	public Optional<Coloc> getColoc(@RequestBody Long idColoc) {
+		
+		return colocRepo.findById(idColoc);
+	}
+	
 	@GetMapping("/gotocoloc")
 	public String subscribed(@RequestBody Coloc coloc) {
 		List<Coloc> l = getAllColocs();
@@ -65,5 +72,25 @@ public class ColocRest {
 		}
 		return p;
 	}
+//	@GetMapping("/gotocoloc")
+//	public String subscribed(@RequestBody Coloc coloc) {
+//		List<Coloc> l = getAllColocs();
+//		String p = "errorColoc";
+//		int i = 0;
+//		while (i < l.size() && p.equals("errorColoc")) {
+//			if (l.get(i).getIdColoc() == (coloc.getIdColoc())) {
+//				p = "colocExist";
+//			}
+//			i++;
+//		}
+//		return p;
+//	}
+	
+	@PostMapping("/idColoc_ok")
+	public Optional<Coloc> idColoc_ok(@RequestBody Coloc u) {
+		return colocRepo.findByIdColoc(u.getIdColoc());
+
+	}
+
 
 }
