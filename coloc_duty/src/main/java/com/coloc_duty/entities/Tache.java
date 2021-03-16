@@ -5,6 +5,8 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToOne;
+
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -21,10 +23,10 @@ public class Tache {
 	private Double nbEtoiles;
 	private boolean ponctuel;
 	
-	@ManyToOne
+	@OneToOne
 	private Coloc coloc;
 	
-	@ManyToOne
+	@OneToOne
 	private User user;
 	
 }

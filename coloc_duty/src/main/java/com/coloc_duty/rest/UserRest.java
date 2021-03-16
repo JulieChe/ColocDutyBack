@@ -1,5 +1,6 @@
 package com.coloc_duty.rest;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -29,10 +30,9 @@ public class UserRest {
 		Optional<User> uOutput = userRepo.findById(uInput.getIdUser());
 		uOutput.get().setColoc(uInput.getColoc());
 		return uOutput.get();
-		
+
 	}
-	
-	
+
 	@GetMapping("/connexion")
 	public Long connexion(@RequestBody User user) {
 		List<User> list = (List<User>) userRepo.findAll();
@@ -62,11 +62,19 @@ public class UserRest {
 		return (List<User>) userRepo.findAll();
 
 	}
-	
-	@PostMapping("/getUserByIdColoc")
-	public Optional<User> getUserByColoc(@RequestBody Long idColoc){
-		return userRepo.findByColoc(colocRepo.findById(idColoc).get());
-		
+
+	@PostMapping("/getUsersByIdColoc")
+	public List<User> getAllUserByIdColoc(@RequestBody Long idColoc) {
+		List<User> l = new ArrayList<User>();
+		List<User> allUser = getAllUsers();
+		allUser.forEach(p -> {
+			if (p.getColoc() != null) {
+				if (p.getColoc().getIdColoc() == idColoc) {
+					l.add(p);
+				}
+			}
+		});
+		return l;
 	}
 
 //	@PostMapping("/saveuser")
@@ -108,10 +116,7 @@ public class UserRest {
 			userRepo.save(user);
 			return "utilisateur créé";
 		}
-		
 
 	}
-	
-	
 
 }

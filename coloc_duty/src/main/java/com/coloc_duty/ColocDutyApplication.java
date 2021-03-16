@@ -107,10 +107,11 @@ public class ColocDutyApplication implements  CommandLineRunner{
 		Tache t1 = new Tache(null, "MénageSDB", LocalDate.now(), (double) 3, false, c1, u1);
 		Tache t2 = new Tache(null, "AspirateurSalon", LocalDate.now(), 2.5, false, c2, u2);
 		Tache t3 = new Tache(null, "MénageCuisine", LocalDate.now(), (double) 3, false, c3, u3);
-		
+		Tache t4 = new Tache(null, "MénageCuisine", LocalDate.now(), (double) 3, false, c1, u3);
 		tacheRepo.save(t1);
 		tacheRepo.save(t2);
 		tacheRepo.save(t3);
+		tacheRepo.save(t4);
 
 		// Test d'intégration de demande
 		Demande d1 = new Demande(u1, c1, "message1", true);
