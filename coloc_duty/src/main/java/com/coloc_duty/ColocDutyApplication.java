@@ -1,5 +1,8 @@
 package com.coloc_duty;
 
+import java.time.LocalDate;
+import java.util.Date;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
@@ -7,6 +10,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 import com.coloc_duty.entities.Adresse;
 import com.coloc_duty.entities.Coloc;
+import com.coloc_duty.entities.Tache;
 import com.coloc_duty.entities.User;
 import com.coloc_duty.repository.AdresseRepository;
 import com.coloc_duty.repository.ColocRepository;
@@ -32,7 +36,7 @@ public class ColocDutyApplication implements  CommandLineRunner{
 		System.out.println("lancement terminé");
 		
 	}
-
+	
 	@Override
 	public void run(String... args) throws Exception {
 		System.out.println("lancement");
@@ -61,7 +65,21 @@ public class ColocDutyApplication implements  CommandLineRunner{
 		colocRepo.save(c2);
 		colocRepo.save(c3);
 		colocRepo.save(c4);
+		
+		
+		// Test d'intégration de taches
+		Tache t1 = new Tache(null, "MénageSDB", LocalDate.now(), (double) 3, false, c1, u1);
+		Tache t2 = new Tache(null, "AspirateurSalon", LocalDate.now(), 2.5, false, c2, u2);
+		Tache t3 = new Tache(null, "MénageCuisine", LocalDate.now(), (double) 3, false, c3, u3);
+		
+		
+		
 	}
+	
+
+	
+	
+
 	
 	
 	

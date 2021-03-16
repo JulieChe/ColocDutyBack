@@ -1,31 +1,30 @@
 package com.coloc_duty.entities;
 
+import java.time.LocalDate;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
-
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
 @Entity @NoArgsConstructor @AllArgsConstructor
 @Data
-public class User {
+public class Tache {
+
 	
 	@Id @GeneratedValue
-	private Long idUser;
-	private String login;
-	private String password;
-	private String email;
-	private String pseudo;
-	private String genre;
+	private Long idTache;
+	private String nomTache;
+	private LocalDate date;
+	private Double nbEtoiles;
+	private boolean ponctuel;
 	
+	@ManyToOne
+	private Coloc coloc;
 	
-	
-	public User(String login,String password) {
-		this.login=login;
-		this.password=password;
-	}
+	@ManyToOne
+	private User user;
 	
 }

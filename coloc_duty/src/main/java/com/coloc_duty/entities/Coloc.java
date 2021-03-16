@@ -3,6 +3,7 @@ package com.coloc_duty.entities;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
 
 
@@ -24,4 +25,5 @@ public class Coloc {
 	
 	@OneToOne
 	private Adresse adresse;
+	
 }
