@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RestController;
 import com.coloc_duty.entities.Coloc;
 import com.coloc_duty.entities.Ids;
 import com.coloc_duty.entities.User;
+import com.coloc_duty.repository.ColocRepository;
 import com.coloc_duty.repository.UserRepository;
 
 @RestController
@@ -21,6 +22,8 @@ public class UserRest {
 	@Autowired
 	private UserRepository userRepo;
 
+	@Autowired
+	private ColocRepository colocRepo;
 
 	@PostMapping("/setColocToUser")
 	public User setColocToUser(User uInput) {
@@ -61,10 +64,18 @@ public class UserRest {
 
 	}
 	
+
 	@PostMapping("/getUser")
 	public Optional<User> getUser(@RequestBody Long idUser) {
 
 		return userRepo.findById(idUser);
+	}
+
+	@PostMapping("/getUserByIdColoc")
+	public Optional<User> getUserByColoc(@RequestBody Long idColoc){
+		return userRepo.findByColoc(colocRepo.findById(idColoc).get());
+		
+
 	}
 
 //	@PostMapping("/saveuser")

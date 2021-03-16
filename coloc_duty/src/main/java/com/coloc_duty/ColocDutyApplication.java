@@ -20,6 +20,7 @@ import com.coloc_duty.entities.User;
 import com.coloc_duty.repository.AdresseRepository;
 import com.coloc_duty.repository.ColocRepository;
 import com.coloc_duty.repository.DemandeRepository;
+import com.coloc_duty.repository.TacheRepository;
 import com.coloc_duty.repository.MurRepository;
 import com.coloc_duty.repository.UserRepository;
 
@@ -39,6 +40,9 @@ public class ColocDutyApplication implements  CommandLineRunner{
 	
 	@Autowired
 	private DemandeRepository demandeRepo;
+	
+	@Autowired
+	private TacheRepository tacheRepo;
 	
 	@Autowired
 	private MurRepository murRepo;
@@ -64,7 +68,6 @@ public class ColocDutyApplication implements  CommandLineRunner{
 	// Test d'intégration d'adresse
 		Adresse a1= new Adresse(null,2,"Alesia","Paris",14000);
 		adresseRepo.save(a1);
-
 		
 	// Test d'intégration de colocation
 		Coloc c1 = new Coloc(null, "nomColoc1", "descColoc1", "capacite1", "loyer1", true,a1,m1);
@@ -77,6 +80,9 @@ public class ColocDutyApplication implements  CommandLineRunner{
 		colocRepo.save(c3);
 		colocRepo.save(c4);
 
+		// Test intégration user avec une coloc
+		User u5 = new User(null, "login5", "password5", "email5", "pseudo4", "genre5", c1,null);
+		userRepo.save(u5);
 
 
 
@@ -102,17 +108,16 @@ public class ColocDutyApplication implements  CommandLineRunner{
 		Tache t2 = new Tache(null, "AspirateurSalon", LocalDate.now(), 2.5, false, c2, u2);
 		Tache t3 = new Tache(null, "MénageCuisine", LocalDate.now(), (double) 3, false, c3, u3);
 		
-		
+		tacheRepo.save(t1);
+		tacheRepo.save(t2);
+		tacheRepo.save(t3);
 
 		// Test d'intégration de demande
-
 		Demande d1 = new Demande(u1, c1, "message1", true);
 		Demande d2 = new Demande(u2, c2, "message2", false);
 		demandeRepo.save(d1);
 		demandeRepo.save(d2);
 
-		
-		
 		
 	}
 	
