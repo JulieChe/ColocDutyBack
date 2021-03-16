@@ -11,6 +11,7 @@ import lombok.NoArgsConstructor;
 
 @Entity @NoArgsConstructor @AllArgsConstructor
 @IdClass(DemandeConstraint.class)
+@Data
 public class Demande {
 	@Id
 	@ManyToOne
