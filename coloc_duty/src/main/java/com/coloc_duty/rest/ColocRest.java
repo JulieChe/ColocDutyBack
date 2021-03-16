@@ -66,7 +66,6 @@ public class ColocRest {
 		} else {
 			return Long.valueOf(0); 
 		}
-		
 	}
 
 	@GetMapping("/gotocoloc")
