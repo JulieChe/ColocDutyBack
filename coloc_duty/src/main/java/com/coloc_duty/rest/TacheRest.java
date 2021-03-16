@@ -24,6 +24,14 @@ public class TacheRest {
 	@Autowired
 	private TacheRepository tacheRepo;
 
+
+	@PostMapping("/savetache")
+	public Tache saveTache(@RequestBody Tache tache) {
+		Tache t = tacheRepo.save(tache);
+		return t;
+	}
+	
+
 	@Autowired
 	private ColocRepository colocRepo;
 

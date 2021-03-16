@@ -7,10 +7,13 @@ import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.coloc_duty.entities.Coloc;
 import com.coloc_duty.entities.Ids;
 import com.coloc_duty.entities.User;
 import com.coloc_duty.repository.ColocRepository;
@@ -61,6 +64,12 @@ public class UserRest {
 	public List<User> getAllUsers() {
 		return (List<User>) userRepo.findAll();
 
+	}
+	
+	@PostMapping("/getUser")
+	public Optional<User> getUser(@RequestBody Long idUser) {
+
+		return userRepo.findById(idUser);
 	}
 
 	@PostMapping("/getUsersByIdColoc")
@@ -118,5 +127,28 @@ public class UserRest {
 		}
 
 	}
+
+	
+	@PostMapping("/affecterColoc/{userId}")
+	public void affecterColoc(@RequestBody Coloc coloc, @PathVariable Long userId) {
+		Optional<User> user = userRepo.findById(userId); 
+		user.get().setColoc(coloc);
+	}
+	
+	@PutMapping("/user/{id}")
+	public User modifUser(@RequestBody User u, @PathVariable Long id) {
+		Optional<Coloc> coloc = colocRepo.findById(u.getColoc().getIdColoc());
+		if(coloc.isPresent()) {
+			u.setIdUser(id);
+			System.out.println(u.toString());
+			return userRepo.save(u);
+		}
+		else {
+			return u;
+		}
+		
+	}
+	
+	
 
 }
