@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.coloc_duty.entities.Coloc;
 import com.coloc_duty.entities.Ids;
 import com.coloc_duty.entities.User;
 import com.coloc_duty.repository.UserRepository;
@@ -58,6 +59,12 @@ public class UserRest {
 	public List<User> getAllUsers() {
 		return (List<User>) userRepo.findAll();
 
+	}
+	
+	@PostMapping("/getUser")
+	public Optional<User> getUser(@RequestBody Long idUser) {
+
+		return userRepo.findById(idUser);
 	}
 
 //	@PostMapping("/saveuser")
