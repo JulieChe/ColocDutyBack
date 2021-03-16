@@ -40,15 +40,23 @@ public class ColocRest {
 
 	@PostMapping("/savecoloc/{id}")
 	public Coloc saveColoc(@RequestBody Coloc coloc, @PathVariable Long id) {
+		Coloc col = new Coloc();
 		Adresse a = adresseRepo.save(coloc.getAdresse());
 		coloc.setAdresse(a);
-
-		Coloc c = colocRepo.save(coloc);
 		Optional<User> u = userRepo.findById(id);
-		u.get().setColoc(c);
+		
+		if(u.get().getColoc() != null) {
+			return col;
+		}
+		else {
+			Coloc c = colocRepo.save(coloc);
+			
+			u.get().setColoc(c);
 
-		userRepo.save(u.get());
-		return c;
+			userRepo.save(u.get());
+			return c;
+		}
+		
 	}
 
 	@PostMapping("/getColoc")
