@@ -2,6 +2,10 @@ package com.coloc_duty.rest;
 
 
 
+
+
+import java.time.LocalDate;
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
@@ -9,7 +13,9 @@ import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -18,6 +24,7 @@ import com.coloc_duty.entities.Tache;
 import com.coloc_duty.entities.User;
 import com.coloc_duty.repository.ColocRepository;
 import com.coloc_duty.repository.TacheRepository;
+import com.coloc_duty.repository.UserRepository;
 
 @RestController
 @CrossOrigin("*")
@@ -25,6 +32,9 @@ public class TacheRest {
 
 	@Autowired
 	private TacheRepository tacheRepo;
+	
+	@Autowired
+	private UserRepository userRepo;
 
 
 	@PostMapping("/savetache")
@@ -62,6 +72,7 @@ public class TacheRest {
 		return l;
 	}
 	
+
 	
 	   
 	        
@@ -81,6 +92,16 @@ public class TacheRest {
 			}
 		});
 		return e;
+	}
+
+
+	@PutMapping("/updateTache/{id}")
+	public Tache modifTache(@RequestBody Tache t, @PathVariable Long id) {
+		Optional<User> u = userRepo.findById(id);
+		t.setUser(u.get());
+		System.out.println(t.toString());
+		return tacheRepo.save(t);
+
 	}
 
 

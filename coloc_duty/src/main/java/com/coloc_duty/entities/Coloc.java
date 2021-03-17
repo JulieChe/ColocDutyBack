@@ -27,7 +27,5 @@ public class Coloc {
 	private Adresse adresse;
 	
 
-	@OneToOne
-	private Mur mur;
 
 }
