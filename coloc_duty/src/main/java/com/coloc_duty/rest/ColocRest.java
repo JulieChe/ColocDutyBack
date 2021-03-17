@@ -125,15 +125,15 @@ public class ColocRest {
 		}
 	}
 	
-	@PostMapping("/getidMurbyidColoc")
-	public Long getIdMurByIdColoc(@RequestBody Long idColoc) {
-		Coloc coloc = colocRepo.findByIdColoc(idColoc).get(); 
-		if (coloc.getMur() != null) {
-		Long idMur = coloc.getMur().getIdMur(); 
-		return idMur;
-		} else {
-			return Long.valueOf(0); 
-		}
-	}
+//@PostMapping("/getMurbyidColoc")
+//public Long getMurByIdColoc(@RequestBody Long idColoc) {
+//	Coloc coloc = colocRepo.findByIdColoc(idColoc).get();
+//	if (coloc.getMur() != null) {
+//		Long idMur = coloc.getMur().getIdMur();
+//		return idMur;
+//	} else {
+//		return Long.valueOf(0);
+//	}
+//	}
 
 }
