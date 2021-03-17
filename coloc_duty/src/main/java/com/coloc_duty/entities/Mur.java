@@ -23,4 +23,5 @@ public class Mur {
 	@ManyToOne
 	private User user;
 
+
 }
