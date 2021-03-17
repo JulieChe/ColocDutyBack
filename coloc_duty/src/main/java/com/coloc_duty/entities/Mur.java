@@ -22,6 +22,9 @@ public class Mur {
 
 	@ManyToOne
 	private User user;
+	
+	@ManyToOne 
+	private Coloc coloc; 
 
 
 }

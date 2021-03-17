@@ -20,7 +20,7 @@ public class Tache {
 	private Long idTache;
 	private String nomTache;
 	private LocalDate date;
-	private Double nbEtoiles;
+	private int nbEtoiles;
 	private String frequence;
 	
 	@OneToOne
