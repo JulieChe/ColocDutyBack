@@ -70,10 +70,10 @@ public class ColocDutyApplication implements  CommandLineRunner{
 		adresseRepo.save(a1);
 		
 	// Test d'intégration de colocation
-		Coloc c1 = new Coloc(null, "nomColoc1", "descColoc1", "capacite1", "loyer1", true,a1,m1);
-		Coloc c2 = new Coloc(null, "nomColoc2", "descColoc2", "capacite2", "loyer2", true,null,null);
-		Coloc c3 = new Coloc(null, "nomColoc3", "descColoc3", "capacite3", "loyer3", false,null,null);
-		Coloc c4 = new Coloc(null, "nomColoc4", "descColoc4", "capacite4", "loyer4", true,null,null);
+		Coloc c1 = new Coloc(null, "nomColoc1", "descColoc1", "capacite1", "loyer1", "Publique",a1,m1);
+		Coloc c2 = new Coloc(null, "nomColoc2", "descColoc2", "capacite2", "loyer2", "Publique",null,null);
+		Coloc c3 = new Coloc(null, "nomColoc3", "descColoc3", "capacite3", "loyer3", "Publique",null,null);
+		Coloc c4 = new Coloc(null, "nomColoc4", "descColoc4", "capacite4", "loyer4", "Privee",null,null);
 		
 		colocRepo.save(c1);
 		colocRepo.save(c2);
@@ -104,10 +104,10 @@ public class ColocDutyApplication implements  CommandLineRunner{
 		
 
 		// Test d'intégration de taches
-		Tache t1 = new Tache(null, "MénageSDB", LocalDate.now(), (double) 3, false, c1, u1);
-		Tache t2 = new Tache(null, "AspirateurSalon", LocalDate.now(), 2.5, false, c2, u2);
-		Tache t3 = new Tache(null, "MénageCuisine", LocalDate.now(), (double) 3, false, c3, u3);
-		Tache t4 = new Tache(null, "MénageCuisine", LocalDate.now(), (double) 3, false, c1, u3);
+		Tache t1 = new Tache(null, "MénageSDB", LocalDate.now(), (double) 3, "Ponctuelle", c1, u1);
+		Tache t2 = new Tache(null, "AspirateurSalon", LocalDate.now(), 2.5, "Hebdomadaire", c2, u2);
+		Tache t3 = new Tache(null, "MénageCuisine", LocalDate.now(), (double) 3, "Hebdomadaire", c3, u3);
+		Tache t4 = new Tache(null, "MénageCuisine", LocalDate.now(), (double) 3, "Ponctuelle", c1, u3);
 		tacheRepo.save(t1);
 		tacheRepo.save(t2);
 		tacheRepo.save(t3);

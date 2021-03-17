@@ -21,7 +21,7 @@ public class Tache {
 	private String nomTache;
 	private LocalDate date;
 	private Double nbEtoiles;
-	private boolean ponctuel;
+	private String frequence;
 	
 	@OneToOne
 	private Coloc coloc;
