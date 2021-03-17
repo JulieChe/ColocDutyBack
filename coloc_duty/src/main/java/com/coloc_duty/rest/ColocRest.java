@@ -13,10 +13,12 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.coloc_duty.entities.Adresse;
 import com.coloc_duty.entities.Coloc;
+import com.coloc_duty.entities.Mur;
 import com.coloc_duty.entities.User;
 import com.coloc_duty.repository.AdresseRepository;
 
 import com.coloc_duty.repository.ColocRepository;
+import com.coloc_duty.repository.MurRepository;
 import com.coloc_duty.repository.UserRepository;
 
 @RestController
@@ -31,6 +33,9 @@ public class ColocRest {
 
 	@Autowired
 	private UserRepository userRepo;
+	
+	@Autowired
+	private MurRepository murRepo;
 
 	@GetMapping("/coloc")
 	public List<Coloc> getAllColocs() {
@@ -107,6 +112,28 @@ public class ColocRest {
 	public Optional<Coloc> idColoc_ok(@RequestBody Coloc u) {
 		return colocRepo.findByIdColoc(u.getIdColoc());
 
+	}
+	
+	@PostMapping("/getidColocbyidMur")
+	public Long getIdColocByIdMur(@RequestBody Long idMur) {
+		Mur mur = murRepo.findByIdMur(idMur).get(); 
+		if (mur.getUser().getColoc() != null) {
+		Long idColoc = mur.getUser().getColoc().getIdColoc(); 
+		return idColoc;
+		} else {
+			return Long.valueOf(0); 
+		}
+	}
+	
+	@PostMapping("/getidMurbyidColoc")
+	public Long getIdMurByIdColoc(@RequestBody Long idColoc) {
+		Coloc coloc = colocRepo.findByIdColoc(idColoc).get(); 
+		if (coloc.getMur() != null) {
+		Long idMur = coloc.getMur().getIdMur(); 
+		return idMur;
+		} else {
+			return Long.valueOf(0); 
+		}
 	}
 
 }

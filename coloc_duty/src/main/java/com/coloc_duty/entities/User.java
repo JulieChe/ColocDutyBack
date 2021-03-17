@@ -25,8 +25,6 @@ public class User {
 	@ManyToOne
 	private Coloc coloc;
 	
-	@OneToOne
-	private Mur mur;
 	
 	
 }

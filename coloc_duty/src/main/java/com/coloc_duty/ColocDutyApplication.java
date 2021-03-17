@@ -58,16 +58,18 @@ public class ColocDutyApplication implements  CommandLineRunner{
 	public void run(String... args) throws Exception {
 		System.out.println("lancement");
 		
-	// Test d'intégration de mur
-		Mur m1 = new Mur(null, "titreMur1", "contenuMur1", "https://previews.123rf.com/images/dynamoland/dynamoland1903/dynamoland190300039/120563024-nature-stone-wall-as-background.jpg");
-		Mur m2 = new Mur(null, "titreMur2", "contenuMur2", "https://previews.123rf.com/images/truetonizz/truetonizz1709/truetonizz170900153/87160211-seamless-brick-wall-texture.jpg");
-		murRepo.save(m1);
-		murRepo.save(m2);
-		
 		
 	// Test d'intégration d'adresse
 		Adresse a1= new Adresse(null,2,"Alesia","Paris",14000);
 		adresseRepo.save(a1);
+		
+		
+	// Test d'intégration de mur
+		Mur m1 = new Mur(null, "titreMur1", "contenuMur1", "https://previews.123rf.com/images/dynamoland/dynamoland1903/dynamoland190300039/120563024-nature-stone-wall-as-background.jpg",null);
+		Mur m2 = new Mur(null, "titreMur2", "contenuMur2", "https://previews.123rf.com/images/truetonizz/truetonizz1709/truetonizz170900153/87160211-seamless-brick-wall-texture.jpg",null);
+		murRepo.save(m1);
+		murRepo.save(m2);
+		
 		
 	// Test d'intégration de colocation
 		Coloc c1 = new Coloc(null, "nomColoc1", "descColoc1", "capacite1", "loyer1", "Publique",a1,m1);
@@ -80,20 +82,14 @@ public class ColocDutyApplication implements  CommandLineRunner{
 		colocRepo.save(c3);
 		colocRepo.save(c4);
 
-		// Test intégration user avec une coloc
-		User u5 = new User(null, "login5", "password5", "email5", "pseudo4", "genre5", c1,null);
-		userRepo.save(u5);
-
-
-
-		
-
 
 	// Test d'intégration d'utilisateur
-		User u1 = new User(null, "login1", "password1", "email1", "pseudo1", "genre1", c1, m1);
-		User u2 = new User(null, "login2", "password2", "email2", "pseudo2", "genre2", null, m2);
-		User u3 = new User(null, "login3", "password3", "email3", "pseudo3", "genre3", null,null);
-		User u4 = new User(null, "login4", "password4", "email4", "pseudo4", "genre4", null,null);
+		User u1 = new User(null, "login1", "password1", "email1", "pseudo1", "genre1", c1);
+		User u2 = new User(null, "login2", "password2", "email2", "pseudo2", "genre2", null);
+		User u3 = new User(null, "login3", "password3", "email3", "pseudo3", "genre3", null);
+		User u4 = new User(null, "login4", "password4", "email4", "pseudo4", "genre4", null);
+		User u5 = new User(null, "login5", "password5", "email5", "pseudo4", "genre5", c1);
+		userRepo.save(u5);
 		
 		
 		userRepo.save(u1);
@@ -101,10 +97,12 @@ public class ColocDutyApplication implements  CommandLineRunner{
 		userRepo.save(u3);
 		userRepo.save(u4);
 		
+
+		
 		
 
 		// Test d'intégration de taches
-		Tache t1 = new Tache(null, "MénageSDB", LocalDate.now(), (double) 3, "Ponctuelle", c1, u1);
+		Tache t1 = new Tache(null, "MénageSDB", LocalDate.now(), (double) 3, "Ponctuelle", c1, null);
 		Tache t2 = new Tache(null, "AspirateurSalon", LocalDate.now(), 2.5, "Hebdomadaire", c2, u2);
 		Tache t3 = new Tache(null, "MénageCuisine", LocalDate.now(), (double) 3, "Hebdomadaire", c3, u3);
 		Tache t4 = new Tache(null, "MénageCuisine", LocalDate.now(), (double) 3, "Ponctuelle", c1, u3);

@@ -20,5 +20,8 @@ public class Mur {
 	private String contenuMur;
 	private String photoMur;
 
+	@ManyToOne
+	private User user;
+
 
 }
