@@ -75,5 +75,20 @@ public class TacheRest {
 		return tacheRepo.save(t);
 
 	}
+	
+	@PutMapping("/resetTache")
+	public void resetTache(@RequestBody Coloc coloc) {
+		List<Tache> list = (List<Tache>) tacheRepo.findAll();
+		for (Tache tache : list) {
+			if (tache.getColoc().getIdColoc().equals(coloc.getIdColoc())) {
+				if (tache.getFrequence().equals("Hebdomadaire") ) {
+					tache.setUser(null);
+					tacheRepo.save(tache);
+				} else {
+					tacheRepo.delete(tache);
+				}
+			}
+		}
+	}
 
 }
