@@ -21,7 +21,7 @@ public class Coloc {
 	private String descColoc;
 	private String capacite;
 	private String loyer;
-	private boolean isPublic;
+	private String isPublic;
 	
 	@OneToOne
 	private Adresse adresse;
