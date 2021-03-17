@@ -102,7 +102,7 @@ public class ColocDutyApplication implements  CommandLineRunner{
 		
 
 		// Test d'intégration de taches
-		Tache t1 = new Tache(null, "MénageSDB", LocalDate.now(), (double) 3, "Ponctuelle", c1, u1);
+		Tache t1 = new Tache(null, "MénageSDB", LocalDate.now(), (double) 3, "Ponctuelle", c1, null);
 		Tache t2 = new Tache(null, "AspirateurSalon", LocalDate.now(), 2.5, "Hebdomadaire", c2, u2);
 		Tache t3 = new Tache(null, "MénageCuisine", LocalDate.now(), (double) 3, "Hebdomadaire", c3, u3);
 		Tache t4 = new Tache(null, "MénageCuisine", LocalDate.now(), (double) 3, "Ponctuelle", c1, u3);

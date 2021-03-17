@@ -36,11 +36,7 @@ public class MurRest {
 		return murRepo.save(mur);
 	}
 	
-	@PostMapping("/getColoc")
-	public Optional<Coloc> getColoc(@RequestBody Long idColoc) {
-
-		return colocRepo.findById(idColoc);
-	}
+	
 
 	
 
