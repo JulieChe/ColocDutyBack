@@ -22,7 +22,7 @@ import com.coloc_duty.repository.MurRepository;
 public class MurRest {
 	@Autowired
 	private MurRepository murRepo;
-	
+
 	@Autowired
 	private ColocRepository colocRepo;
 
@@ -36,14 +36,16 @@ public class MurRest {
 	public Mur saveMur(@RequestBody Mur mur) {
 		return murRepo.save(mur);
 	}
-	
+
 	@GetMapping("/mur/{id}")
 	public List<Mur> getMurByColocId(@PathVariable Long id) {
 		return murRepo.findByColocIdColoc(id);
 	}
-	
-	
 
-	
+	@PostMapping("/murPoster")
+	public Mur murPoster(@RequestBody Mur mur) {
+		Mur mursave = new Mur(null,mur.getTitreMur(), mur.getContenuMur(),null, mur.getUser(), mur.getColoc());
+		return murRepo.save(mursave); 
+	}
 
 }

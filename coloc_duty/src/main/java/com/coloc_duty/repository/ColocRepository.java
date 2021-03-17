@@ -14,4 +14,5 @@ public interface ColocRepository  extends CrudRepository<Coloc,Long>{
 	public Optional<Coloc> findByIdColoc(Long idColoc);
 	
 	
+	
 }
