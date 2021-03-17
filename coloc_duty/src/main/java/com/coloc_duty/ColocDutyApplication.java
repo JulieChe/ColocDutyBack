@@ -75,11 +75,11 @@ public class ColocDutyApplication implements  CommandLineRunner{
 		colocRepo.save(c4);
 		
 		// Test d'intégration d'utilisateur
-		User u1 = new User(null, "login1", "password1", "email1", "pseudo1", "genre1", c1);
-		User u2 = new User(null, "login2", "password2", "email2", "pseudo2", "genre2", null);
+		User u1 = new User(null, "login1", "password1", "email1", "pseudo1", "genre1", c2);
+		User u2 = new User(null, "login2", "password2", "email2", "pseudo2", "genre2", c3);
 		User u3 = new User(null, "login3", "password3", "email3", "pseudo3", "genre3", null);
 		User u4 = new User(null, "login4", "password4", "email4", "pseudo4", "genre4", null);
-		User u5 = new User(null, "login5", "password5", "email5", "pseudo4", "genre5", c1);
+		User u5 = new User(null, "login5", "password5", "email5", "pseudo4", "genre5", c2);
 		
 		
 		userRepo.save(u1);

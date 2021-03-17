@@ -33,7 +33,7 @@ public class ColocRest {
 
 	@Autowired
 	private UserRepository userRepo;
-	
+
 	@Autowired
 	private MurRepository murRepo;
 
@@ -49,19 +49,18 @@ public class ColocRest {
 		Adresse a = adresseRepo.save(coloc.getAdresse());
 		coloc.setAdresse(a);
 		Optional<User> u = userRepo.findById(id);
-		
-		if(u.get().getColoc() != null) {
+
+		if (u.get().getColoc() != null) {
 			return col;
-		}
-		else {
+		} else {
 			Coloc c = colocRepo.save(coloc);
-			
+
 			u.get().setColoc(c);
 
 			userRepo.save(u.get());
 			return c;
 		}
-		
+
 	}
 
 	@PostMapping("/getColoc")
@@ -72,12 +71,12 @@ public class ColocRest {
 
 	@PostMapping("/getidColocbyidUser")
 	public Long getIdColocByIdUser(@RequestBody Long idUser) {
-		User user = userRepo.findByIdUser(idUser).get(); 
+		User user = userRepo.findByIdUser(idUser).get();
 		if (user.getColoc() != null) {
-		Long idColoc = user.getColoc().getIdColoc(); 
-		return idColoc;
+			Long idColoc = user.getColoc().getIdColoc();
+			return idColoc;
 		} else {
-			return Long.valueOf(0); 
+			return Long.valueOf(0);
 		}
 	}
 
@@ -113,27 +112,28 @@ public class ColocRest {
 		return colocRepo.findByIdColoc(u.getIdColoc());
 
 	}
-	
+
 	@PostMapping("/getidColocbyidMur")
 	public Long getIdColocByIdMur(@RequestBody Long idMur) {
-		Mur mur = murRepo.findByIdMur(idMur).get(); 
+		Mur mur = murRepo.findByIdMur(idMur).get();
 		if (mur.getUser().getColoc() != null) {
-		Long idColoc = mur.getUser().getColoc().getIdColoc(); 
-		return idColoc;
+			Long idColoc = mur.getUser().getColoc().getIdColoc();
+			return idColoc;
 		} else {
-			return Long.valueOf(0); 
+			return Long.valueOf(0);
 		}
 	}
-	
-//@PostMapping("/getMurbyidColoc")
-//public Long getMurByIdColoc(@RequestBody Long idColoc) {
-//	Coloc coloc = colocRepo.findByIdColoc(idColoc).get();
-//	if (coloc.getMur() != null) {
-//		Long idMur = coloc.getMur().getIdMur();
-//		return idMur;
-//	} else {
-//		return Long.valueOf(0);
-//	}
-//	}
 
+/*	@PostMapping("/getMurbyidColoc")
+	public Optional<Mur> getMurByIdColoc(@RequestBody Long idColoc) {
+		Coloc coloc = colocRepo.findByIdColoc(idColoc).get(); // rechercher la coloc
+		System.out.println(murRepo.findByColoc(coloc));
+		List<Mur> l = murRepo.findByColoc(coloc);
+		if (l != null) {
+			return l;
+		} else {
+			return Optional.empty();
+		}
+	}
+*/
 }

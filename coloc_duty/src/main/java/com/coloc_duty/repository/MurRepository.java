@@ -1,5 +1,6 @@
 package com.coloc_duty.repository;
 
+import java.util.List;
 import java.util.Optional;
 
 import org.springframework.data.repository.CrudRepository;
@@ -12,7 +13,9 @@ public interface MurRepository  extends CrudRepository<Mur,Long>{
 
 	public Optional<Mur> findByIdMur(Long idMur);
 	
-	public Optional<Mur> findByColoc(Coloc coloc);
+	//public List<Mur> findByColoc(Coloc coloc);
+	
+	public List<Mur> findByColocIdColoc(Long idColoc);
 	
 	
 }
