@@ -134,29 +134,31 @@ public class ColocRest {
 	 * 
 	 */
 
-//	@PostMapping("/getColocByIdColoc")
-//	public Optional<Coloc> getColocByIdColoc(@RequestBody Long idColoc) {
-//
-//		return colocRepo.findByIdColoc(idColoc);
-//	}
-//
-//	@PostMapping("/getColocByCapacite")
-//	public List<Coloc> getColocByCapacite(@RequestBody String capacite) {
-//
-//		return colocRepo.findByCapacite(capacite);
-//	}
-//
-//	@PostMapping("/getColocByLoyer")
-//	public List<Coloc> getColocByLoyer(@RequestBody String loyer) {
-//
-//		return colocRepo.findByLoyer(loyer);
-//	}
-//
+
+	@PostMapping("/getColocByIdColoc")
+	public Optional<Coloc> getColocByIdColoc(@RequestBody Long idColoc) {
+
+		return colocRepo.findByIdColoc(idColoc);
+	}
+
+	@PostMapping("/getColocByCapacite")
+	public List<Coloc> getColocByCapacite(@RequestBody String capacite) {
+
+		return colocRepo.findByCapacite(capacite);
+	}
+
+	@PostMapping("/getColocByLoyer")
+	public List<Coloc> getColocByLoyer(@RequestBody String loyer) {
+
+		return colocRepo.findByLoyer(loyer);
+	}
+
 	@GetMapping("/getColocByAdresse/{ville}")
 	public List<Coloc> getColocByAdresse(@PathVariable String ville) {
 
 		return colocRepo.findByAdresseVille(ville);
 	}
+
 
 	@PostMapping("/getColocByCapaciteAndLoyerAndVille")
 	public List<Coloc> getColocByCapaciteAndLoyerAndVille(@RequestBody Coloc coloc) {

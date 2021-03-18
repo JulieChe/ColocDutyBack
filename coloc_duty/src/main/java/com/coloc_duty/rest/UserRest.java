@@ -150,10 +150,24 @@ public class UserRest {
 		
 	}
 	
+	@PutMapping("/quitterColoc")
+	public User quitterColoc (@RequestBody Long id) {
+		Optional<User> u = userRepo.findById(id);
+		u.get().setColoc(null);
+		return userRepo.save(u.get());
+	}
+	
+	@PutMapping("/modifuser/{id}")
+	public User modifUserforUpload(@RequestBody User u, @PathVariable Long id) {
+			u.setIdUser(id);
+			return userRepo.save(u);
+		}
+		
+	}
 
 	
 	
 	
 	
 
-}
+
