@@ -64,10 +64,10 @@ public class ColocDutyApplication implements  CommandLineRunner{
 		adresseRepo.save(a1);
 		
 		// Test d'intégration de colocation
-		Coloc c1 = new Coloc(null, "nomColoc1", "descColoc1", "capacite1", "loyer1", "Publique",a1);
-		Coloc c2 = new Coloc(null, "nomColoc2", "descColoc2", "capacite2", "loyer2", "Publique",null);
-		Coloc c3 = new Coloc(null, "nomColoc3", "descColoc3", "capacite3", "loyer3", "Publique",null);
-		Coloc c4 = new Coloc(null, "nomColoc4", "descColoc4", "capacite4", "loyer4", "Privee",null);
+		Coloc c1 = new Coloc(null, "Gemos", "la coloc des esprit de lumiere", "6", "4578", "Publique", a1);
+		Coloc c2 = new Coloc(null, "La maison du sagitaire", " chasse les vierge dans la forêt", "28", "100", "Publique", null);
+		Coloc c3 = new Coloc(null, "Les belier des CRS", "Macron les a gazé", "78", "50", "Publique", null);
+		Coloc c4 = new Coloc(null, "Les vierges claqué au sol", "la foret qui cache des arbres peu cacher plus", "3", "102587", "Privee" ,null);
 		
 		colocRepo.save(c1);
 		colocRepo.save(c2);
@@ -81,11 +81,11 @@ public class ColocDutyApplication implements  CommandLineRunner{
 		
 		// Test d'intégration d'utilisateur
 
-		User u1 = new User(null, "login1", "password1", "email1", "pseudo1", "genre1", c2, null);
-		User u2 = new User(null, "login2", "password2", "email2", "pseudo2", "genre2", c3, null);
-		User u3 = new User(null, "login3", "password3", "email3", "pseudo3", "genre3", null, null);
-		User u4 = new User(null, "login4", "password4", "email4", "pseudo4", "genre4", null, null);
-		User u5 = new User(null, "login5", "password5", "email5", "pseudo4", "genre5", c2, null);
+		User u1 = new User(null, "kangou", "junior", "kangoujunior@coloc.fr", "Kangu Junior", "M", c2, null);
+		User u2 = new User(null, "castafiore", "lampion", "tintin@coloc.fr", "Lampion CASTAFIORE", "M", c3, null);
+		User u3 = new User(null, "reine", "neige", "reine@neige.fr", "Rene des Neiges", "F", null, null);
+		User u4 = new User(null, "maya", "abeille", "maya@abeille.fr", "Maya L'Abeille", "F", null, null);
+		User u5 = new User(null, "conan", "aventure", "aventure@conan.fr", "Conan L'aventurier", "M", c2, null);
 
 		userRepo.save(u5);
 
