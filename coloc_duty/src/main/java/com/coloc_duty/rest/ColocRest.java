@@ -124,44 +124,89 @@ public class ColocRest {
 		}
 	}
 
-/*	@PostMapping("/getMurbyidColoc")
-	public Optional<Mur> getMurByIdColoc(@RequestBody Long idColoc) {
-		Coloc coloc = colocRepo.findByIdColoc(idColoc).get(); // rechercher la coloc
-		System.out.println(murRepo.findByColoc(coloc));
-		List<Mur> l = murRepo.findByColoc(coloc);
-		if (l != null) {
-			return l;
-		} else {
-			return Optional.empty();
-		}
-	}
-	
-*/
+	/*
+	 * @PostMapping("/getMurbyidColoc") public Optional<Mur>
+	 * getMurByIdColoc(@RequestBody Long idColoc) { Coloc coloc =
+	 * colocRepo.findByIdColoc(idColoc).get(); // rechercher la coloc
+	 * System.out.println(murRepo.findByColoc(coloc)); List<Mur> l =
+	 * murRepo.findByColoc(coloc); if (l != null) { return l; } else { return
+	 * Optional.empty(); } }
+	 * 
+	 */
 
-	@PostMapping("/getColocByIdColoc")
-	public Optional<Coloc> getColocByIdColoc(@RequestBody Long idColoc){
-		
-		return colocRepo.findByIdColoc(idColoc);
+//	@PostMapping("/getColocByIdColoc")
+//	public Optional<Coloc> getColocByIdColoc(@RequestBody Long idColoc) {
+//
+//		return colocRepo.findByIdColoc(idColoc);
+//	}
+//
+//	@PostMapping("/getColocByCapacite")
+//	public List<Coloc> getColocByCapacite(@RequestBody String capacite) {
+//
+//		return colocRepo.findByCapacite(capacite);
+//	}
+//
+//	@PostMapping("/getColocByLoyer")
+//	public List<Coloc> getColocByLoyer(@RequestBody String loyer) {
+//
+//		return colocRepo.findByLoyer(loyer);
+//	}
+//
+	@GetMapping("/getColocByAdresse/{ville}")
+	public List<Coloc> getColocByAdresse(@PathVariable String ville) {
+
+		return colocRepo.findByAdresseVille(ville);
 	}
-	
-	
-	@PostMapping("/getColocByCapacite")
-	public List<Coloc> getColocByCapacite(@RequestBody String capacite){
+
+	@PostMapping("/getColocByCapaciteAndLoyerAndVille")
+	public List<Coloc> getColocByCapaciteAndLoyerAndVille(@RequestBody Coloc coloc) {
+
+		if ((coloc.getCapacite() == "" || coloc.getCapacite() == null)
+				&& (coloc.getLoyer() == "" || coloc.getLoyer() == null)
+				&& (coloc.getAdresse().getVille() == "" || coloc.getAdresse().getVille() == null)) {
+			return getAllColocs();
 		
-		return colocRepo.findByCapacite(capacite);
+		}
+			else if (coloc.getCapacite() == "" || coloc.getCapacite() == null) {						
+			if (coloc.getLoyer() == "" || coloc.getLoyer() == null) {						//[*,*,3]
+				return colocRepo.findByAdresseVille(coloc.getAdresse().getVille());				
+			} else if (coloc.getAdresse().getVille() == "" || coloc.getAdresse().getVille() == null) { 	//[1,*,*]
+				return colocRepo.findByLoyer(coloc.getLoyer());								
+			}
+			else {																							//[1,*,3]
+				return colocRepo.findByLoyerAndAdresseVille(coloc.getLoyer(), coloc.getAdresse().getVille());
+			}
+
+		}
+
+		else if (coloc.getLoyer() == "" || coloc.getLoyer() == null) {						
+			if (coloc.getCapacite() == "" || coloc.getCapacite() == null) {					//[*,*,3]
+				return colocRepo.findByAdresseVille(coloc.getAdresse().getVille());
+			} else if (coloc.getAdresse().getVille() == "" || coloc.getAdresse().getVille() == null) {		//[*,2,*]
+				return colocRepo.findByCapacite(coloc.getCapacite());
+			} 
+			else {
+				return colocRepo.findByCapaciteAndAdresseVille(coloc.getCapacite(), coloc.getAdresse().getVille());	//[*,2,3]
+			}
+		}
+
+		else if (coloc.getAdresse().getVille() == "" || coloc.getAdresse().getVille() == null) {		//[*,*,3]
+			if (coloc.getLoyer() == "" || coloc.getLoyer() == null) {
+				return colocRepo.findByCapacite(coloc.getCapacite());
+			} else if (coloc.getCapacite() == "" || coloc.getCapacite() == null) {
+				return colocRepo.findByLoyer(coloc.getLoyer());
+			}
+			else {
+				return colocRepo.findByLoyerAndCapacite(coloc.getLoyer(), coloc.getCapacite());
+			}
+		}
+		else /* if ((coloc.getCapacite() != "" || coloc.getCapacite() != null)
+			&& (coloc.getLoyer() != "" || coloc.getLoyer() != null)
+			&& (coloc.getAdresse().getVille() != "" || coloc.getAdresse().getVille() != null))*/
+		return colocRepo.findByCapaciteAndLoyerAndAdresseVille(coloc.getCapacite(), coloc.getLoyer(),
+				coloc.getAdresse().getVille());
+
+
 	}
-	
-	
-	@PostMapping("/getColocByLoyer")
-	public List<Coloc> getColocByLoyer(@RequestBody String loyer){
-		
-		return colocRepo.findByLoyer(loyer);
-	}
-	
-	@PostMapping("/getColocByAdresse")
-	public List<Coloc> getColocByAdresse(@RequestBody Adresse adresse){
-		
-		return colocRepo.findByAdresse(adresse);
-	}
-	
+
 }
