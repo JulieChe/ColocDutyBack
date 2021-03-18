@@ -91,9 +91,9 @@ public class TacheRest {
 		List<Tache> allTaches = getAllTaches();
 		allTaches.forEach(t -> {
 			if (t.getUser() != null) {
-				if (t.getUser().getIdUser() == idUser) {
+				if (t.getUser().getIdUser().equals(idUser)) {
 					l.add(t);
-					etoilesPerso[0] = etoilesPerso[0] + (t.getNbEtoiles());
+					etoilesPerso[0] += (t.getNbEtoiles());
 				}
 			}
 		});
@@ -118,14 +118,19 @@ public class TacheRest {
 		});
 		return etoilesTot[0];
 	}
-	
+
+	java.text.DecimalFormat df = new java.text.DecimalFormat("0.##");
 	double etoilesPercent;
 	@PostMapping("getEtoilesPercent")
 	public double getEtoilesPourcent(@RequestBody long idUser) {
 		Optional<User> u = userRepo.findById(idUser);
 		Coloc c = u.get().getColoc();
-		
-		return etoilesPercent = getEtoilesUser(idUser) / getEtoilesColoc(c.getIdColoc());
+		System.out.println(getEtoilesUser(idUser));
+		System.out.println(getEtoilesColoc(c.getIdColoc()));
+		etoilesPercent = ((double)getEtoilesUser(idUser) / (double)getEtoilesColoc(c.getIdColoc()))*100;
+		System.out.println(df.format(etoilesPercent) );
+
+		return (etoilesPercent) ;
 
 	}
 
