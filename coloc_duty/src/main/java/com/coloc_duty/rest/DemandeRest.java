@@ -1,5 +1,6 @@
 package com.coloc_duty.rest;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -29,6 +30,28 @@ public class DemandeRest {
 		return demandeRepo.save(demande);
 	}
 
+	@GetMapping("/demandesNL")
+	public List<Demande> getAllDemandesNL() {
+		List<Demande> demandes = (List<Demande>) demandeRepo.findAll();
+		List<Demande> demandesNL = new ArrayList<Demande>();
+		for (int i = 0; i < demandes.size(); i++) {
+			if (demandes.get(i).isLu() == false) {
+				demandesNL.add(demandes.get(i));
+			}
+		}
+		return demandesNL;
+	}
 	
+	@GetMapping("/demandesL")
+	public List<Demande> getAllDemandesL() {
+		List<Demande> demandes = (List<Demande>) demandeRepo.findAll();
+		List<Demande> demandesL = new ArrayList<Demande>();
+		for (int i = 0; i < demandes.size(); i++) {
+			if (demandes.get(i).isLu() == true) {
+				demandesL.add(demandes.get(i));
+			}
+		}
+		return demandesL;
+	}
 
 }
