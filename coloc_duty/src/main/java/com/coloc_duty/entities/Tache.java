@@ -23,6 +23,7 @@ public class Tache {
 	private int nbEtoiles;
 	private String frequence;
 	
+	
 	@OneToOne
 	private Coloc coloc;
 	

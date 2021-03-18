@@ -3,6 +3,7 @@ package com.coloc_duty.entities;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.Lob;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
 
@@ -24,6 +25,10 @@ public class User {
 	
 	@ManyToOne
 	private Coloc coloc;
+	
+	@Lob
+	private byte[] image; 
+	
 	
 	
 	
