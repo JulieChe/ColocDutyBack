@@ -16,6 +16,7 @@ import lombok.NoArgsConstructor;
 public class Membre {
 	
 	@Id @GeneratedValue
+	private Long idMembre;
 	private Long idUser;
 	private Long nbEtoiles;
 	

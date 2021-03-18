@@ -20,8 +20,11 @@ import com.coloc_duty.entities.Membre;
 import com.coloc_duty.entities.Tache;
 import com.coloc_duty.entities.User;
 import com.coloc_duty.repository.ColocRepository;
+import com.coloc_duty.repository.MembreRepository;
 import com.coloc_duty.repository.TacheRepository;
 import com.coloc_duty.repository.UserRepository;
+
+import JavaTpoint.JavaObjectToJSON.ConvertJSON;
 
 
 @RestController
@@ -30,6 +33,9 @@ public class UserRest {
 	@Autowired
 	private UserRepository userRepo;
 
+	@Autowired
+	private MembreRepository membreRepo;
+	
 	@Autowired
 	private ColocRepository colocRepo;
 	
@@ -98,20 +104,25 @@ public class UserRest {
 		
 	@PostMapping("/getEtoilesUsers")
 	public List<Membre> getEtoilesUsers(@RequestBody Long idColoc) {
-		List<User> list_users_coloc = getAllUserByIdColoc(idColoc);
-		List<Membre> membres = new ArrayList<Membre>();
 		
+		List<User> list_users_coloc = getAllUserByIdColoc(idColoc);
+//		List<Long> etoiles = new ArrayList<Long>();
+		List<Membre> membres = new ArrayList<Membre>();
+//		
 		list_users_coloc.forEach(u -> {
 			int e = getEtoilesUser(u.getIdUser());
-			System.out.println(e);
-			Membre m = new Membre(u.getIdUser(),(long)e);
-			System.out.println(m.toString());
+			Membre m = new Membre(null,u.getIdUser(),(long)e);
+			m = membreRepo.save(m);
 			membres.add(m);
 			});
-		
-		System.out.println(membres.toString());
+//		list_users_coloc.forEach(u -> {
+//			int e = getEtoilesUser(u.getIdUser());
+//			etoiles.add((long)e);
+//			});
+	
 //		
 		return membres ;
+//		return etoiles;
 	
 	}
 	
@@ -208,6 +219,7 @@ public class UserRest {
 	public List<Tache> getAllTaches() {
 		return (List<Tache>) tacheRepo.findAll();
 	}
+	
 	
 	
 	
