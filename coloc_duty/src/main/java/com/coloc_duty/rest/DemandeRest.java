@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.coloc_duty.entities.Demande;
+import com.coloc_duty.entities.User;
 import com.coloc_duty.repository.DemandeRepository;
 
 @RestController
@@ -29,10 +30,24 @@ public class DemandeRest {
 	public Demande saveDemande(@RequestBody Demande demande) {
 		return demandeRepo.save(demande);
 	}
+	
+	@PostMapping("/getDemandesByIdColoc")
+	public List<Demande> getAllDemandesByIdColoc(@RequestBody Long idColoc) {
+		List<Demande> demandes = getAllDemandes();
+		List<Demande> demandesC = new ArrayList<Demande>();
+		demandes.forEach(d -> {
+			if (d.getColoc() != null) {
+				if (d.getColoc().getIdColoc() == idColoc) {
+					demandesC.add(d);
+				}
+			}
+		});
+		return demandesC;
+	}
 
 	@GetMapping("/demandesNL")
-	public List<Demande> getAllDemandesNL() {
-		List<Demande> demandes = (List<Demande>) demandeRepo.findAll();
+	public List<Demande> getAllDemandesNLbyColoc(@RequestBody Long idColoc) {
+		List<Demande> demandes = getAllDemandesByIdColoc(idColoc);
 		List<Demande> demandesNL = new ArrayList<Demande>();
 		for (int i = 0; i < demandes.size(); i++) {
 			if (demandes.get(i).isLu() == false) {
@@ -41,10 +56,10 @@ public class DemandeRest {
 		}
 		return demandesNL;
 	}
-	
+
 	@GetMapping("/demandesL")
-	public List<Demande> getAllDemandesL() {
-		List<Demande> demandes = (List<Demande>) demandeRepo.findAll();
+	public List<Demande> getAllDemandesLbyColoc(@RequestBody Long idColoc) {
+		List<Demande> demandes = getAllDemandesByIdColoc(idColoc);
 		List<Demande> demandesL = new ArrayList<Demande>();
 		for (int i = 0; i < demandes.size(); i++) {
 			if (demandes.get(i).isLu() == true) {
