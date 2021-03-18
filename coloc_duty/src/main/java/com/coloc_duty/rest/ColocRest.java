@@ -135,5 +135,33 @@ public class ColocRest {
 			return Optional.empty();
 		}
 	}
+	
 */
+
+	@PostMapping("/getColocByIdColoc")
+	public Optional<Coloc> getColocByIdColoc(@RequestBody Long idColoc){
+		
+		return colocRepo.findByIdColoc(idColoc);
+	}
+	
+	
+	@PostMapping("/getColocByCapacite")
+	public List<Coloc> getColocByCapacite(@RequestBody String capacite){
+		
+		return colocRepo.findByCapacite(capacite);
+	}
+	
+	
+	@PostMapping("/getColocByLoyer")
+	public List<Coloc> getColocByLoyer(@RequestBody String loyer){
+		
+		return colocRepo.findByLoyer(loyer);
+	}
+	
+	@PostMapping("/getColocByAdresse")
+	public List<Coloc> getColocByAdresse(@RequestBody Adresse adresse){
+		
+		return colocRepo.findByAdresse(adresse);
+	}
+	
 }
