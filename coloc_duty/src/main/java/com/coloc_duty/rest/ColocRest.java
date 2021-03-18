@@ -138,6 +138,7 @@ public class ColocRest {
 	
 */
 
+
 	@PostMapping("/getColocByIdColoc")
 	public Optional<Coloc> getColocByIdColoc(@RequestBody Long idColoc){
 		
