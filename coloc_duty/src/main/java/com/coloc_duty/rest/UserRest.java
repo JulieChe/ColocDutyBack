@@ -150,6 +150,13 @@ public class UserRest {
 		
 	}
 	
+	@PutMapping("/quitterColoc")
+	public User quitterColoc (@RequestBody Long id) {
+		Optional<User> u = userRepo.findById(id);
+		u.get().setColoc(null);
+		return userRepo.save(u.get());
+	}
+	
 
 	
 	

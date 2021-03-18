@@ -67,6 +67,21 @@ public class TacheRest {
 	}
 
 	
+	@PostMapping("/getTachesUser")
+	public List<Tache> getTachesUser(@RequestBody Long idUser) {
+		List<Tache> l = new ArrayList<Tache>();
+		List<Tache> allTaches = getAllTaches();
+		allTaches.forEach(t -> {
+			if (t.getUser() != null) {
+				if (t.getUser().getIdUser() == idUser) {
+					l.add(t);
+				}
+			}
+		});
+		return l;
+	}
+	
+	
 	@PostMapping("/getEtoilesUser")
 	public int getEtoilesUser(@RequestBody Long idUser) {
 

@@ -49,8 +49,9 @@ public class MurRest {
 		return murRepo.save(mursave); 
 	}
 	
-	@DeleteMapping("/murDelete")
-	public void murDelete(@RequestBody Mur mur) {
+	@DeleteMapping("/murDelete/{id}")
+	public void murDelete(@PathVariable Long id) {
+		Mur mur = murRepo.findById(id).get(); 
 		murRepo.delete(mur);
 	}
 
