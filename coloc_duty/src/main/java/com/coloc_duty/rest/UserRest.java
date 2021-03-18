@@ -211,6 +211,14 @@ public class UserRest {
 	
 	
 	
+	@PutMapping("/modifuser/{id}")
+	public User modifUserforUpload(@RequestBody User u, @PathVariable Long id) {
+			u.setIdUser(id);
+			return userRepo.save(u);
+		}
 	
 
-}
+		
+	}
+
+
