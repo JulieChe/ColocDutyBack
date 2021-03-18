@@ -16,9 +16,13 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.coloc_duty.entities.Coloc;
 import com.coloc_duty.entities.Ids;
+import com.coloc_duty.entities.Membre;
+import com.coloc_duty.entities.Tache;
 import com.coloc_duty.entities.User;
 import com.coloc_duty.repository.ColocRepository;
+import com.coloc_duty.repository.TacheRepository;
 import com.coloc_duty.repository.UserRepository;
+
 
 @RestController
 @CrossOrigin("*")
@@ -28,6 +32,9 @@ public class UserRest {
 
 	@Autowired
 	private ColocRepository colocRepo;
+	
+	@Autowired
+	private TacheRepository tacheRepo;
 
 	@PostMapping("/setColocToUser")
 	public User setColocToUser(User uInput) {
@@ -86,7 +93,30 @@ public class UserRest {
 		});
 		return l;
 	}
+	
 
+		
+	@PostMapping("/getEtoilesUsers")
+	public List<Membre> getEtoilesUsers(@RequestBody Long idColoc) {
+		List<User> list_users_coloc = getAllUserByIdColoc(idColoc);
+		List<Membre> membres = new ArrayList<Membre>();
+		
+		list_users_coloc.forEach(u -> {
+			int e = getEtoilesUser(u.getIdUser());
+			System.out.println(e);
+			Membre m = new Membre(u.getIdUser(),(long)e);
+			System.out.println(m.toString());
+			membres.add(m);
+			});
+		
+		System.out.println(membres.toString());
+//		
+		return membres ;
+	
+	}
+	
+	
+	
 //	@PostMapping("/saveuser")
 //	public User saveUser(@RequestBody User user) {
 //
@@ -157,17 +187,38 @@ public class UserRest {
 		return userRepo.save(u.get());
 	}
 	
+	
+	public int getEtoilesUser(@RequestBody Long idUser) {
+
+		int[] etoilesPerso = { 0 };
+
+		List<Tache> l = new ArrayList<Tache>();
+		List<Tache> allTaches = getAllTaches();
+		allTaches.forEach(t -> {
+			if (t.getUser() != null) {
+				if (t.getUser().getIdUser().equals(idUser)) {
+					l.add(t);
+					etoilesPerso[0] += (t.getNbEtoiles());
+				}
+			}
+		});
+		return etoilesPerso[0];
+	}
+	
+	public List<Tache> getAllTaches() {
+		return (List<Tache>) tacheRepo.findAll();
+	}
+	
+	
+	
 	@PutMapping("/modifuser/{id}")
 	public User modifUserforUpload(@RequestBody User u, @PathVariable Long id) {
 			u.setIdUser(id);
 			return userRepo.save(u);
 		}
+	
+
 		
 	}
-
-	
-	
-	
-	
 
 

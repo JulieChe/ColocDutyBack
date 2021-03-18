@@ -66,6 +66,20 @@ public class TacheRest {
 		return l;
 	}
 
+//	@PostMapping("/getEtoilesUsersByColoc")
+//	public List<Tache> getEtoilesUsersByColoc(@RequestBody Long idColoc) {
+//		List<Tache> l = new ArrayList<Tache>();
+//		List<Tache> allTaches = getAllTaches();
+//		allTaches.forEach(t -> {
+//			if (t.getColoc() != null) {
+//				if (t.getColoc().getIdColoc() == idColoc) {
+//					l.add(t.getNbEtoiles());
+//				}
+//			}
+//		});
+//		return l;
+//	}
+	
 	
 	@PostMapping("/getTachesUser")
 	public List<Tache> getTachesUser(@RequestBody Long idUser) {
