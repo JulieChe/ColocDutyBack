@@ -124,6 +124,9 @@ public class ColocDutyApplication implements  CommandLineRunner{
 		// Test d'intégration de demande
 		Demande d1 = new Demande(u1, c1, "message1", true);
 		Demande d2 = new Demande(u2, c2, "message2", false);
+		Demande d3 = new Demande(u3, c2, "hello", false);
+		Demande d4 = new Demande(u4, c2, "hey", false);
+		Demande d5 = new Demande(u5, c2, "sava?", true);
 		demandeRepo.save(d1);
 		demandeRepo.save(d2);
 
