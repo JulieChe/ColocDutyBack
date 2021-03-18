@@ -60,6 +60,18 @@ public class DemandeRest {
 		}); 
 		return demandesNL;
 	}
+	
+	@PostMapping("/nbDemandesNL")
+	public int countDemandesNLbyColoc(@RequestBody Long idColoc) {
+		List<Demande> demandes = getAllDemandesByIdColoc(idColoc);
+		List<Demande> demandesNL = new ArrayList<Demande>();
+		demandes.forEach(d ->{
+			if (d.isLu() == false) {
+				demandesNL.add(d);
+			}
+		}); 
+		return demandesNL.size();
+	}
 
 	@PostMapping("/demandesL")
 	public List<Demande> getAllDemandesLbyColoc(@RequestBody Long idColoc) {
