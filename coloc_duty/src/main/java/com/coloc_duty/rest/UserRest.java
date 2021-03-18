@@ -162,12 +162,9 @@ public class UserRest {
 			u.setIdUser(id);
 			return userRepo.save(u);
 		}
+	
+
 		
 	}
-
-	
-	
-	
-	
 
 
