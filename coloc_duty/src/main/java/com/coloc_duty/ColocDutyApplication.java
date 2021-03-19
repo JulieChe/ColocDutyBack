@@ -77,7 +77,7 @@ public class ColocDutyApplication implements  CommandLineRunner{
 		
 		Coloc c1 = new Coloc(null, "Les Champs-Elysées", "Bienvenue dans la coloc des Champs-Elysées !", "6", "550", "Publique", a1);
 		Coloc c2 = new Coloc(null, "Tour Eiffel", "Ici, nous avons une vue imprenable sur la Tour Eiffel !", "3", "800", "Publique", a2);
-		Coloc c3 = new Coloc(null, "Cathédrale de Reims", "Dans cette coloc, vous aurez la chance de voir la cathédrale de raims depuis votre lit.", "4", "750", "Publique", a3);
+		Coloc c3 = new Coloc(null, "Cathédrale de Reims", "Dans cette coloc, vous aurez la chance de voir la cathédrale de Reims depuis votre lit.", "4", "750", "Publique", a3);
 		Coloc c4 = new Coloc(null, "Le Sacré-Coeur", "Visite gratuite du Sacré-Coeur pour tous les colocataires !", "3", "950", "Privee" ,a4);
 		Coloc c5 = new Coloc(null, "Le Château de Versailles", "On dit que le Roi Louis XIV en personne a dormi dans la chambre 2", "5", "850", "Privee" ,a5);
 		
@@ -167,7 +167,7 @@ public class ColocDutyApplication implements  CommandLineRunner{
 		Tache t13 = new Tache(null, "Ranger les armoires", LocalDate.now(),5, "Ponctuelle", c1, null);
 		Tache t14 = new Tache(null, "AspirateurSalon", LocalDate.now(), 2, "Hebdomadaire", c1, null);
 		Tache t15 = new Tache(null, "Changer la litière du chat", LocalDate.now(),3, "Hebdomadaire", c2, null);
-		Tache t16 = new Tache(null, "Sortir le chein", LocalDate.now(),4, "Ponctuelle", c2, null);
+		Tache t16 = new Tache(null, "Sortir le chien", LocalDate.now(),4, "Ponctuelle", c2, null);
 		Tache t17 = new Tache(null, "Passer le chiffon dans les placards", LocalDate.now(),3, "Hebdomadaire", c2, null);
 		Tache t18 = new Tache(null, "Ranger le Lave Vaisselle", LocalDate.now(), 2, "Hebdomadaire", c3, null);
 		Tache t19 = new Tache(null, "Aménager le salon", LocalDate.now(),3, "Pontuelle", c2, null);
