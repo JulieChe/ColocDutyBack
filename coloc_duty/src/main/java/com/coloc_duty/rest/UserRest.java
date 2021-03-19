@@ -111,21 +111,44 @@ public class UserRest {
 //		
 		list_users_coloc.forEach(u -> {
 			int e = getEtoilesUser(u.getIdUser());
-			Membre m = new Membre(null,u.getIdUser(),(long)e);
+			
+			double pourcent = getEtoilesPourcent(u.getIdUser());
+			
+			Membre m = new Membre(null,u.getIdUser(),u.getPseudo(), (long)e, pourcent);
 			m = membreRepo.save(m);
 			membres.add(m);
 			});
-//		list_users_coloc.forEach(u -> {
-//			int e = getEtoilesUser(u.getIdUser());
-//			etoiles.add((long)e);
-//			});
-	
-//		
 		return membres ;
-//		return etoiles;
-	
 	}
 	
+	double etoilesPercent;
+	public double getEtoilesPourcent(@RequestBody long idUser) {
+		Optional<User> u = userRepo.findById(idUser);
+		Coloc c = u.get().getColoc();
+//		System.out.println(getEtoilesUser(idUser));
+//		System.out.println(getEtoilesColoc(c.getIdColoc()));
+		etoilesPercent = ((double)getEtoilesUser(idUser) / (double)getEtoilesColoc(c.getIdColoc()))*100;
+
+		return (etoilesPercent) ;
+
+	}
+	
+	public int getEtoilesColoc(@RequestBody Long idColoc) {
+
+		int[] etoilesTot = { 0 };
+
+		List<Tache> l = new ArrayList<Tache>();
+		List<Tache> allTaches = getAllTaches();
+		allTaches.forEach(t -> {
+			if (t.getUser() != null) {
+				if (t.getColoc().getIdColoc() == idColoc) {
+					l.add(t);
+					etoilesTot[0] = etoilesTot[0] + (t.getNbEtoiles());
+				}
+			}
+		});
+		return etoilesTot[0];
+	}
 	
 	
 //	@PostMapping("/saveuser")

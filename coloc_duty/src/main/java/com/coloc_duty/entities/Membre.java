@@ -18,7 +18,9 @@ public class Membre {
 	@Id @GeneratedValue
 	private Long idMembre;
 	private Long idUser;
+	private String name;
 	private Long nbEtoiles;
+	private double y;
 	
 	
 
